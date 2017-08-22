@@ -14,10 +14,10 @@ server.on('request', function (request, response) {
           });
    
     } else {
-            response.statusCode = 404;
-            response.write('<div><img src="cat.jpg" alt="Tekst alternatywny"/></div>');
-            response.write('<h1>404: Zła ścieżka!</h1>');
-            response.end();
+        fs.readFile('./cat.jpg', function(err, data) {
+            response.writeHead(404, {'Content-Type': 'image/jpeg'});
+            response.end(data);  
+        });
     }
 });
 
